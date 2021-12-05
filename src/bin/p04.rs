@@ -1,5 +1,3 @@
-use core::num;
-
 const FILE: &str = include_str!("../data/p04");
 
 type Number = (u8, bool);
@@ -157,11 +155,11 @@ mod test {
 
     #[test]
     fn test_part_one() {
-        assert_eq!(part_one(), 1893605);
+        assert_eq!(part_one(), 58374);
     }
 
     #[test]
     fn test_part_two() {
-        assert_eq!(part_two(), 2120734350);
+        assert_eq!(part_two(), 11377);
     }
 }

@@ -1,5 +1,3 @@
-use core::num;
-
 const FILE: &str = include_str!("../data/p03");
 const LENGTH: usize = 12;
 
@@ -100,6 +98,6 @@ mod test {
 
     #[test]
     fn test_part_two() {
-        assert_eq!(part_two(), 2120734350);
+        assert_eq!(part_two(), 587895);
     }
 }
