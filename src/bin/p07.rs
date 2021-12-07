@@ -10,9 +10,15 @@ fn part_one() -> usize {
     let max_crab = crabs.iter().max().unwrap();
     let min_crab = crabs.iter().min().unwrap();
 
-    (*min_crab..*max_crab).map(|index| {
-        crabs.iter().map(|c| (*c as isize - index as isize).abs()).sum::<isize>()
-    }).min().unwrap() as usize
+    (*min_crab..*max_crab)
+        .map(|index| {
+            crabs
+                .iter()
+                .map(|c| (*c as isize - index as isize).abs())
+                .sum::<isize>()
+        })
+        .min()
+        .unwrap() as usize
 }
 
 fn part_two() -> usize {
@@ -21,12 +27,18 @@ fn part_two() -> usize {
     let max_crab = crabs.iter().max().unwrap();
     let min_crab = crabs.iter().min().unwrap();
 
-    (*min_crab..*max_crab).map(|index| {
-        crabs.iter().map(|c| {
-            let a = (*c as isize - index as isize).abs();
-            (a+1) * a / 2
-        } ).sum::<isize>()
-    }).min().unwrap() as usize
+    (*min_crab..*max_crab)
+        .map(|index| {
+            crabs
+                .iter()
+                .map(|c| {
+                    let a = (*c as isize - index as isize).abs();
+                    (a + 1) * a / 2
+                })
+                .sum::<isize>()
+        })
+        .min()
+        .unwrap() as usize
 }
 
 fn main() {

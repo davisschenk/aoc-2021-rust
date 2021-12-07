@@ -1,5 +1,5 @@
+use std::cmp::{max, min};
 use std::fmt::Display;
-use std::cmp::{min, max};
 
 const FILE: &str = include_str!("../data/p05");
 
@@ -7,7 +7,7 @@ const FILE: &str = include_str!("../data/p05");
 
 struct Line {
     start: (u64, u64),
-    end: (u64, u64)
+    end: (u64, u64),
 }
 
 impl Line {
@@ -18,9 +18,14 @@ impl Line {
         let mut l_s = l.split(",");
 
         Self {
-            start: (r_s.next().unwrap().parse().unwrap(), r_s.next().unwrap().parse().unwrap()),
-            end: (l_s.next().unwrap().parse().unwrap(), l_s.next().unwrap().parse().unwrap())
-
+            start: (
+                r_s.next().unwrap().parse().unwrap(),
+                r_s.next().unwrap().parse().unwrap(),
+            ),
+            end: (
+                l_s.next().unwrap().parse().unwrap(),
+                l_s.next().unwrap().parse().unwrap(),
+            ),
         }
     }
 }
@@ -37,7 +42,7 @@ impl Field {
         let mut field = vec![];
 
         for _ in 0..max_y + 1 {
-            field.push(vec![0 ; max_x as usize + 1])
+            field.push(vec![0; max_x as usize + 1])
         }
 
         for line in &lines {
@@ -49,38 +54,27 @@ impl Field {
                 for y in start..=end {
                     field[y as usize][line.start.0 as usize] += 1;
                 }
-            }
-
-            else if line.start.1 == line.end.1 {
+            } else if line.start.1 == line.end.1 {
                 let start = min(line.start.0, line.end.0);
                 let end = max(line.start.0, line.end.0);
 
                 for x in start..=end {
                     field[line.start.1 as usize][x as usize] += 1;
                 }
-            }
-
-            else if diags {
-                let x_dir = if line.start.0 < line.end.0 {1} else {-1};
-                let y_dir = if line.start.1 < line.end.1 {1} else {-1};
+            } else if diags {
+                let x_dir = if line.start.0 < line.end.0 { 1 } else { -1 };
+                let y_dir = if line.start.1 < line.end.1 { 1 } else { -1 };
 
                 for distance in 0..=(line.end.0 as isize - line.start.0 as isize).abs() {
                     let x = line.start.0 as isize + distance * x_dir;
                     let y = line.start.1 as isize + distance * y_dir;
 
                     field[y as usize][x as usize] += 1;
-
-                }   
-
+                }
             }
-                
         }
 
-        Self {
-            field
-        }
-
-
+        Self { field }
     }
 
     fn find_max(lines: &Vec<Line>) -> (u64, u64) {
